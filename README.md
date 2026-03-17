@@ -7,7 +7,7 @@ An interactive Power BI dashboard analyzing the performance of Brazilian e-comme
 ## 🔗 Live Dashboard
 
 **View the report directly:**
-https://app.powerbi.com/view?r=eyJrIjoiZDljOTdkZTAtOTM1MC00MTk2LTg5NDItNWUyZjJmMTJiYTJiIiwidCI6IjEwMWRhNTg3LTE4NDMtNGY1Mi04YjhhLTE3YjA2OWM2NmQzMyIsImMiOjJ9
+(https://app.powerbi.com/view?r=eyJrIjoiZDljOTdkZTAtOTM1MC00MTk2LTg5NDItNWUyZjJmMTJiYTJiIiwidCI6IjEwMWRhNTg3LTE4NDMtNGY1Mi04YjhhLTE3YjA2OWM2NmQzMyIsImMiOjJ9)
 
 **Embed code (for websites or portfolios):**
 ```html
