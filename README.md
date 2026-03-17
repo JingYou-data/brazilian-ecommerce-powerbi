@@ -118,7 +118,7 @@ RANKX(ALL(olist_customers_dataset[customer_state]), [total_revenue], , DESC, DEN
 
 **Jing You**
 Data Analytics & Engineering | Nashville, TN
-[GitHub](https://github.com/JingYou-data) · [LinkedIn](https://www.linkedin.com/in/jingyou-data)
+[GitHub](https://github.com/JingYou-data) · [LinkedIn](https://www.linkedin.com/in/jing-you84/))
 
 ---
 
