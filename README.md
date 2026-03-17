@@ -2,7 +2,17 @@
 
 An interactive Power BI dashboard analyzing the performance of Brazilian e-commerce across 27 states, built using the Olist public dataset (2016–2018).
 
-🔗 **[View Live Dashboard](https://app.powerbi.com/view?r=eyJrIjoiZDljOTdkZTAtOTM1MC00MTk2LTg5NDItNWUyZjJmMTJiYTJiIiwidCI6IjEwMWRhNTg3LTE4NDMtNGY1Mi04YjhhLTE3YjA2OWM2NmQzMyIsImMiOjJ9)**
+---
+
+## 🔗 Live Dashboard
+
+**View the report directly:**
+https://app.powerbi.com/view?r=eyJrIjoiZDljOTdkZTAtOTM1MC00MTk2LTg5NDItNWUyZjJmMTJiYTJiIiwidCI6IjEwMWRhNTg3LTE4NDMtNGY1Mi04YjhhLTE3YjA2OWM2NmQzMyIsImMiOjJ9
+
+**Embed code (for websites or portfolios):**
+```html
+<iframe title="Brazilian E-Commerce" width="600" height="373.5" src="https://app.powerbi.com/view?r=eyJrIjoiZDljOTdkZTAtOTM1MC00MTk2LTg5NDItNWUyZjJmMTJiYTJiIiwidCI6IjEwMWRhNTg3LTE4NDMtNGY1Mi04YjhhLTE3YjA2OWM2NmQzMyIsImMiOjJ9" frameborder="0" allowFullScreen="true"></iframe>
+```
 
 ---
 
@@ -109,7 +119,7 @@ RANKX(ALL(olist_customers_dataset[customer_state]), [total_revenue], , DESC, DEN
 
 - **SP (São Paulo)** dominates in Revenue (#1) and Order Volume (#1), accounting for ~38% of total national revenue
 - **AP (Amapá)** leads in Review Score (#1) and On-Time Delivery (#4) despite low market volume
-- **AOV** has declined from R$190 (2016) to R$162 (2018), suggesting market maturation and price competition
+- **Average Order Value (AOV)** has declined from R$190 (2016) to R$162 (2018), suggesting market maturation and price competition
 - **On-Time Delivery** national average is 92%, with significant variation across states
 
 ---
