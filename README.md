@@ -1,76 +1,79 @@
 # 🛒 Brazilian E-Commerce Analytics Dashboard
 
-An interactive Power BI dashboard analyzing the performance of Brazilian e-commerce across 27 states, built using the Olist public dataset (2016–2018).
+<p align="center">
+  <img src="https://img.shields.io/badge/Power%20BI-Advanced%20DAX-F2C811?style=for-the-badge&logo=powerbi&logoColor=black">
+  <img src="https://img.shields.io/badge/Dataset-99K%2B%20Orders-blue?style=for-the-badge">
+  <img src="https://img.shields.io/badge/Coverage-27%20Brazilian%20States-green?style=for-the-badge">
+  <img src="https://img.shields.io/badge/Period-2016–2018-orange?style=for-the-badge">
+</p>
+
+> **Executive-level Power BI dashboard analyzing Brazilian e-commerce performance across 27 states — featuring dynamic DAX narratives, radar scoring, and RANKX-based state rankings.**
+
+🔗 **[View Live Dashboard](https://app.powerbi.com/view?r=eyJrIjoiZDljOTdkZTAtOTM1MC00MTk2LTg5NDItNWUyZjJmMTJiYTJiIiwidCI6IjEwMWRhNTg3LTE4NDMtNGY1Mi04YjhhLTE3YjA2OWM2NmQzMyIsImMiOjJ9)**
 
 ---
 
-## 🔗 Live Dashboard
+## 📌 Project Overview
 
-**View the report directly:**
-(https://app.powerbi.com/view?r=eyJrIjoiZDljOTdkZTAtOTM1MC00MTk2LTg5NDItNWUyZjJmMTJiYTJiIiwidCI6IjEwMWRhNTg3LTE4NDMtNGY1Mi04YjhhLTE3YjA2OWM2NmQzMyIsImMiOjJ9)
-
-**Embed code (for websites or portfolios):**
-```html
-<iframe title="Brazilian E-Commerce" width="600" height="373.5" src="https://app.powerbi.com/view?r=eyJrIjoiZDljOTdkZTAtOTM1MC00MTk2LTg5NDItNWUyZjJmMTJiYTJiIiwidCI6IjEwMWRhNTg3LTE4NDMtNGY1Mi04YjhhLTE3YjA2OWM2NmQzMyIsImMiOjJ9" frameborder="0" allowFullScreen="true"></iframe>
-```
-
----
-
-## 📊 Project Overview
-
-This project transforms raw Brazilian e-commerce transaction data into an executive-level analytics dashboard. It enables stakeholders to explore state-level performance across five key dimensions, identify market leaders, and surface actionable insights through dynamic DAX-powered narratives.
+| | |
+|---|---|
+| **Dataset** | Olist Brazilian E-Commerce (Kaggle) |
+| **Total Records** | 1,550,800+ across 8 tables |
+| **Orders Analyzed** | 99,441 |
+| **Geographic Scope** | 27 Brazilian states |
+| **Key Dimensions** | Revenue, Orders, AOV, Review Score, On-Time Delivery |
+| **Tools** | Power BI Desktop, DAX, Power Query, Spider Chart Visual |
 
 ---
 
 ## 🗂️ Dashboard Pages
 
 ### 1. Welcome
-Landing page with navigation to all report sections.
+Landing page with visual navigation to all report sections.
 
 ### 2. Market Overview
 - 4 KPI cards: Total Revenue, Total Orders, Average Order Value, Review Score
 - Interactive image-based metric selector (bookmark-driven)
-- Dynamic trend line chart that updates based on selected metric
-- AI-style narrative: *"SP leads Brazilian e-commerce with R$16.01M in revenue..."*
+- Dynamic trend line that updates based on selected metric
+- AI-style narrative auto-generated from DAX: *"SP leads Brazilian e-commerce with R$16.01M in revenue..."*
 
 ### 3. State Performance
 - Spider/Radar chart showing 5-dimension performance profile per state
-- State selector with real-time radar chart update
-- 10 KPI cards: value + rank for each dimension
-- Dynamic narrative summarizing state strengths and weaknesses
+- State selector with real-time radar update
+- 10 KPI cards showing value + rank for each dimension
+- Dynamic narrative summarizing each state's strengths and weaknesses
 
 ### 4. State Ranking
 - 5 parallel bar charts ranking all 27 states across each dimension
-- Click-to-highlight: select any state to update rankings and narrative
-- Large rank indicators (#1, #2...) for quick scanning
-- Dynamic narrative: *"RJ ranks #2 in Revenue and #2 in Orders..."*
+- Click-to-highlight: select any state to update all rankings and narrative simultaneously
+- Large rank indicators (#1, #2...) for fast executive scanning
 
 ---
 
 ## ⚙️ Technical Highlights
 
 | Feature | Implementation |
-|--------|---------------|
+|---|---|
 | Dynamic narratives | DAX `SELECTEDVALUE` + `FORMAT` + conditional `IF` logic |
 | Interactive metric selector | Power BI Bookmarks + Image Actions |
 | State performance radar | Custom Spider Chart visual + normalized Score measures |
-| Cross-page highlight | `RANKX` with `ALL()` + conditional color formatting |
+| State ranking | `RANKX` with `ALL()` + conditional color formatting |
 | Standardized scoring | Min-Max normalization DAX (0–100 scale) |
 | Cross-filter interactions | Edit Interactions panel configuration |
 
 ---
 
-## 📐 DAX Measures (Selected)
+## 📐 DAX Measures
 
 ```dax
--- Dynamic narrative for Market Overview page
+-- Dynamic narrative (Market Overview page)
 Dynamic_Narrative =
 VAR TopState = [Top_State]
 VAR TopRevenue = FORMAT([total_revenue]/1000000, "#,##0.00") & "M"
 VAR OnTimeRate = FORMAT([on_time_delivery_rate], "0%")
 VAR AboveBelow = IF([on_time_delivery_rate] >= [Avg_OnTime_AllStates], "at or above", "below")
 RETURN
-"" & TopState & " leads Brazilian e-commerce with R$" & TopRevenue &
+TopState & " leads Brazilian e-commerce with R$" & TopRevenue &
 " in revenue. On-time delivery rate is " & OnTimeRate & ", " & AboveBelow & " the national average."
 
 -- Min-Max normalization for radar chart
@@ -81,7 +84,7 @@ DIVIDE(
     MINX(ALL(olist_customers_dataset[customer_state]), [total_revenue])
 ) * 100
 
--- State ranking with dense rank
+-- Dense rank across all states
 State_Revenue_Rank =
 RANKX(ALL(olist_customers_dataset[customer_state]), [total_revenue], , DESC, DENSE)
 ```
@@ -93,7 +96,7 @@ RANKX(ALL(olist_customers_dataset[customer_state]), [total_revenue], , DESC, DEN
 **Source:** [Olist Brazilian E-Commerce Dataset](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce) (Kaggle)
 
 | Table | Records | Description |
-|-------|---------|-------------|
+|---|---|---|
 | olist_orders_dataset | 99,441 | Order status and timestamps |
 | olist_order_items_dataset | 112,650 | Items per order |
 | olist_order_payments_dataset | 103,886 | Payment details |
@@ -105,31 +108,50 @@ RANKX(ALL(olist_customers_dataset[customer_state]), [total_revenue], , DESC, DEN
 
 ---
 
-## 🧰 Tech Stack
+## 📈 Key Insights
 
-- **Power BI Desktop** — Report development
-- **DAX** — Advanced measures, dynamic narratives, normalization
-- **Power Query (M)** — Data transformation and modeling
-- **Spider Chart** — Custom visual for radar/pentagon chart
-- **Power BI Service** — Publishing and public sharing
+- **SP (São Paulo)** dominates Revenue (#1) and Order Volume (#1), accounting for ~38% of total national revenue
+- **AP (Amapá)** leads in Review Score (#1) and ranks #4 in On-Time Delivery — strong quality performance despite low market volume
+- **Average Order Value** declined from R$190 (2016) to R$162 (2018), signaling market maturation and price competition
+- **On-Time Delivery** national average is 92%, with significant variation across states — a key differentiator for smaller markets
 
 ---
 
-## 📈 Key Insights
+## 📁 Repository Structure
 
-- **SP (São Paulo)** dominates in Revenue (#1) and Order Volume (#1), accounting for ~38% of total national revenue
-- **AP (Amapá)** leads in Review Score (#1) and On-Time Delivery (#4) despite low market volume
-- **Average Order Value (AOV)** has declined from R$190 (2016) to R$162 (2018), suggesting market maturation and price competition
-- **On-Time Delivery** national average is 92%, with significant variation across states
+```
+Brazilian-Ecommerce/
+├── README.md                    # Project documentation
+├── Brazilian_Ecommerce.pbix     # Power BI report file
+└── data/
+    ├── olist_orders_dataset.csv
+    ├── olist_order_items_dataset.csv
+    ├── olist_order_payments_dataset.csv
+    ├── olist_order_reviews_dataset.csv
+    ├── olist_customers_dataset.csv
+    ├── olist_sellers_dataset.csv
+    ├── olist_products_dataset.csv
+    └── olist_geolocation_dataset.csv
+```
+
+---
+
+## 🚀 Future Work
+
+- [ ] Migrate to **dbt + Snowflake** for scalable data modeling
+- [ ] Add **seller performance** analysis page
+- [ ] Build **product category** drill-through analysis
+- [ ] Automate data refresh via **Power BI Service scheduled refresh**
 
 ---
 
 ## 👤 Author
 
-**Jing You**
-Data Analytics & Engineering | Nashville, TN
-[GitHub](https://github.com/JingYou-data) · [LinkedIn](https://www.linkedin.com/in/jing-you84/))
+**Jing You** — Data Analytics & Engineering
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-jing--you84-0077B5?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/jing-you84/)
+[![GitHub](https://img.shields.io/badge/GitHub-JingYou--data-181717?style=flat&logo=github&logoColor=white)](https://github.com/JingYou-data)
+[![Portfolio](https://img.shields.io/badge/Portfolio-jingyou--data.github.io-blue?style=flat)](https://jingyou-data.github.io)
 
 ---
 
-*Built with Power BI · Dataset: Olist Brazilian E-Commerce 2016–2018*
+*Built with Power BI Desktop · Dataset: Olist Brazilian E-Commerce 2016–2018*
